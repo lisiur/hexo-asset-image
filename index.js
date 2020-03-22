@@ -17,13 +17,13 @@ hexo.extend.filter.register('after_post_render', function(data){
     if(/.*\/index\.html$/.test(link)) {
       // when permalink is end with index.html, for example 2019/02/20/xxtitle/index.html
       // image in xxtitle/ will go to xxtitle/index/
-      appendLink = 'index/';
       var endPos = link.lastIndexOf('/');
+      link = link.substring(beginPos, endPos) + '/';
     }
     else {
-      var endPos = link.length-1;
+      var endPos = link.lastIndexOf('.');
+      link = link.substring(beginPos)
     }
-    link = link.substring(beginPos, endPos) + '/' + appendLink;
 
     var toprocess = ['excerpt', 'more', 'content'];
     for(var i = 0; i < toprocess.length; i++){
